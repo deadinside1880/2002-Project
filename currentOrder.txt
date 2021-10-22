@@ -1,0 +1,5 @@
+Order Created At22-10-2021 13:46:54
+Fries,$10
+Chicken Steak,$10
+Lemonade,$10
+Order Finished At22-10-2021 13:47:06
