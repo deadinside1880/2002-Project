@@ -1,44 +1,49 @@
-import java.util.Scanner;
+import java.util.ArrayList;
 
-public class Promotions {
-	String promoName; 
-	String itemName; 
-	String itemDescription;
-	double itemPrice; 
+
+public class Promotions{
 	
+	String promoName; 
+	String promoDescription;
+	double promoPrice; 
+	String promoItems;
 	// Constructor 
 
-	public Promotions(String promoName, String itemName, String description, double itemPrice) { 
+	public Promotions(String promoName, String description, double itemPrice, String promoItems) { 
 		this.promoName = promoName; 
-		this.itemName = itemName; 
-		this.itemDescription = description;
-		this.itemPrice = itemPrice; 
+		this.promoDescription = description;
+		this.promoPrice = itemPrice;
+		this.promoItems = promoItems;
 	}
 	
 	// Getters
 	public double getPromoPrice() {
-		return itemPrice; 
+		return promoPrice; 
 	}
 	public String getPromoName() {
 		return promoName; 
 	}
-	public String getItemName() {
-		return itemName;
+	public String getPromoDescription() {
+		return promoDescription;
+	}
+	public String getPromoItems() {
+		return promoItems;
 	}
 	
 	// Setters
-	public void setPackagePrice(int price) {
-		itemPrice = price; 
+	public void setPackagePrice(double price) {
+		promoPrice = price; 
 	}
 	public void setPromoName(String name) {
 		promoName = name; 
 	}
 	
-	public void setItemName(String name) {
-		itemName = name;
+	public void setPromoItems(String promoItems) {
+		this.promoItems = promoItems;
 	}
 	
 	public void setDescription(String name) {
+		promoDescription = name; 
 	}
 
 	
