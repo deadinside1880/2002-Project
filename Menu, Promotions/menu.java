@@ -6,23 +6,90 @@ import java.util.Scanner;
 
 // menu consists of the collection of ala Carte items and promotion items 
 public class menu {
-
-	public static void main(String[] args) throws IOException {
-		menu Menu = new menu(); 
-		// Menu.displayMenu();
-		// Menu.removePromoItem("1-for-1 Burgers ");
-		// Menu.updateAlaCarte("Fried Rice");
-		Menu.updatePromo("Family Meal");
-		Menu.displayMenu();
-	}
+	
+	
+//	// FOR TESTING PURPOSES 
+//	public static void main(String[] args) throws IOException {
+//		menu Menu = new menu("MenuItems.csv", "Promotions.csv"); 
+//		// Menu.displayMenu();
+//
+//		Scanner sc = new Scanner(System.in);
+//		int choice; 
+//		String name, description;
+//		double price; 
+//		
+//		do {
+//			System.out.println("Welcome to Menu! What would you like to do?"); 
+//			System.out.println("(1) Add AlaCarte Items (2) Update AlaCarte Items (3) Remove AlaCarte Items"); 
+//			System.out.println("(4) Add Promo Items (5) Update Promo Items (6) Remove Promo Items");
+//			System.out.println("(7) Display Menu");
+//			System.out.println("(8) Quit");
+//			
+//			choice = sc.nextInt();
+//			sc.nextLine(); 
+//			
+//			switch(choice) {
+//			case 1:
+//				// name, description, price to be input
+//				System.out.println("Enter the new item name");
+//				name = sc.nextLine(); 
+//				System.out.println("Enter the new item description");
+//				description = sc.nextLine(); 
+//				System.out.println("Enter the new item price");
+//				price = sc.nextDouble();
+//				Menu.addAlaCarteItem(name, description, price);
+//				System.out.println("Item added!"); 
+//				break;
+//			case 2:
+//				System.out.println("Which item would you like to update?");
+//				name = sc.nextLine(); 
+//				Menu.updateAlaCarte(name);
+//				break;
+//			case 3:
+//				System.out.println("Which item would you like to remove?");
+//				name = sc.nextLine(); 
+//				Menu.removeAlaCarteItem(name);
+//				break;
+//			case 4:
+//				System.out.println("Enter the new promo name");
+//				name = sc.nextLine(); 
+//				System.out.println("Enter the new promo description");
+//				description = sc.nextLine(); 
+//				System.out.println("Enter the new promo price");
+//				price = sc.nextDouble();
+//				System.out.println("Enter the new promo items");
+//				String items = sc.nextLine();
+//				Menu.addPromotionItem(name, description, items, price);
+//				System.out.println("Promo added!"); 
+//				break;
+//			case 5:
+//				System.out.println("Which promo would you like to update?");
+//				name = sc.nextLine(); 
+//				Menu.updatePromo(name);
+//				break;
+//			case 6:
+//				System.out.println("Which item would you like to remove?");
+//				name = sc.nextLine(); 
+//				Menu.removePromoItem(name);
+//				break;
+//			case 7: 
+//				Menu.displayMenu();
+//				break;
+//			}
+//			
+//		}while(choice < 8);
+//		sc.close(); 
+//		System.exit(0);
+//		
+//	}
 	
 	ArrayList<MenuItems> alaCarteMenu  = new ArrayList<>(); 
 	ArrayList<Promotions> promoMenu = new ArrayList<>(); 
 	
 	
-	public menu() throws IOException {
-		alaCarteMenu = readcsvAlaCarte("MenuItems.csv"); 
-		promoMenu = readCSVPromo("Promotions.csv");
+	public menu(String fileAlaCarte, String filePromo) throws IOException {
+		alaCarteMenu = readcsvAlaCarte(fileAlaCarte); 
+		promoMenu = readCSVPromo(filePromo);
 	}
 	
 	public ArrayList<MenuItems> readcsvAlaCarte(String fileName) {
@@ -110,6 +177,16 @@ public class menu {
 		String promoItems = metadata[3]; 
 		
 		return new Promotions(promoName, promoDescription, promoPrice, promoItems); 
+	}
+	
+	public void addAlaCarteItem(String name, String description, double price) {
+		MenuItems newItem = new MenuItems(name, description, price);
+		alaCarteMenu.add(newItem);
+	}
+	
+	public void addPromotionItem(String name, String description, String promoItems, double price) {
+		Promotions newItem = new Promotions(name, description, price, promoItems);
+		promoMenu.add(newItem);
 	}
 
 	
@@ -232,15 +309,7 @@ public class menu {
 		// System.out.println(index);
 	}
 	
-	public void addAlaCarteItem(String name, String description, double price) {
-		MenuItems newItem = new MenuItems(name, description, price);
-		alaCarteMenu.add(newItem);
-	}
-	
-	public void addPromotionItem(String name, String description, String promoItems, double price) {
-		Promotions newItem = new Promotions(name, description, price, promoItems);
-		promoMenu.add(newItem);
-	}
+
 	
 	public ArrayList<MenuItems> removeAlaCarteItem(String name){
 		int index = -1;
@@ -277,9 +346,9 @@ public class menu {
 		// Display the alaCarte Menu
 		System.out.println("----------- ALA CARTE MENU ---------------------");
 		for (int i = 0; i < alaCarteMenu.size(); i++) {
-			System.out.println(alaCarteMenu.get(i).getName() + " --- " + alaCarteMenu.get(i).getPrice()); 
-			System.out.println("Description: " + alaCarteMenu.get(i).getDescription());
-			System.out.println("Type: " + alaCarteMenu.get(i).getType());
+			System.out.println(alaCarteMenu.get(i).getName() + "\t --- \t " + alaCarteMenu.get(i).getPrice()); 
+			System.out.println(alaCarteMenu.get(i).getDescription());
+			// System.out.println("Type: " + alaCarteMenu.get(i).getType());
 		}
 		System.out.println();
 		
@@ -287,9 +356,10 @@ public class menu {
 		// Display the Promotion Menu 
 		for (int i = 0; i < promoMenu.size(); i++) {
 			System.out.println("[" + promoMenu.get(i).getPromoName() + "] "
-							+ promoMenu.get(i).getPromoItems() + " ----- " + promoMenu.get(i).getPromoPrice()); 
+							+ promoMenu.get(i).getPromoItems() + "\t ----- \t" + promoMenu.get(i).getPromoPrice()); 
 			System.out.println(promoMenu.get(i).getPromoDescription()); 
 		}
+		System.out.println();
 	}
 	
 }
