@@ -1,7 +1,10 @@
 package restaurant;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,10 +41,8 @@ public class reservationApp {
         int reservationCounter = 0;
         Scanner sc = new Scanner(System.in);
         int j= 0;
-        System.out.println("Enter the total number of reservations:");
-        reservationCounter = sc.nextInt();
-        for(int i=0; i<reservationCounter; i++)
-		{   int k = 0;
+       
+         int k = 0;
             int  pax = 0;
             String name;
             int contact = 0;
@@ -58,16 +59,27 @@ public class reservationApp {
             id =  getRandomNumberString();
             System.out.println("Enter the Date in this format (dd-MMM-yyyy) ");
             inputDate = sc.next();
-            System.out.println(id);
             date = getDateInputString(inputDate);
-            tableCount = Math.floorDiv(pax, 5);
+            tableCount = (Math.floorDiv(pax, 5))+1;
             table[] tableList = new table[tableCount];
-            while(k<tableCount && pax > 0){
-                tableList[k] = new table(tableID, pax, customerID ,true);
+            int temppax=pax;
+            while(k<tableCount && temppax > 0){
+                tableList[k] = new table(tableID, temppax, customerID ,true);
+                URL url = getClass().getResource("table.txt");
+         		File file = new File(url.getPath());
+         		FileWriter fw = new FileWriter(file.getAbsolutePath(), true);
+         		BufferedWriter bw = new BufferedWriter(fw);
+        		PrintWriter pw = new PrintWriter(bw);
+         		pw.println(tableList[k].getTableID()+","+tableList[k].getCapacity()+","+tableList[k].getCustomerID()+","+tableList[k].getIsOccupied());
+         		System.out.println("Data Successfully appended into file");
+        		pw.flush();
+         		pw.close();
+        	    bw.close();
+        	    fw.close();
                 tableID++;
                 customerID++;
                 k++;
-                pax = pax -5;
+                temppax = temppax -5;
 
             }
            
@@ -77,7 +89,7 @@ public class reservationApp {
      		FileWriter fw = new FileWriter(file.getAbsolutePath(), true);
      		BufferedWriter bw = new BufferedWriter(fw);
     		PrintWriter pw = new PrintWriter(bw);
-     		pw.println(reservationList[totalReservationCounter].getreservationID()+','+reservationList[totalReservationCounter].getnoOfPax()+','+reservationList[totalReservationCounter].getName()+','+reservationList[totalReservationCounter].getContact()+','+reservationList[totalReservationCounter].getDate()+','+reservationList[totalReservationCounter].getTableList());
+     		pw.println(reservationList[totalReservationCounter].getreservationID()+','+reservationList[totalReservationCounter].getnoOfPax()+','+reservationList[totalReservationCounter].getName()+','+reservationList[totalReservationCounter].getContact()+','+reservationList[totalReservationCounter].getDate()+','+reservationList[totalReservationCounter].getTableList().length);
      		System.out.println("Data Successfully appended into file");
     		pw.flush();
      		pw.close();
@@ -87,18 +99,30 @@ public class reservationApp {
             totalReservationCounter++;
 
 
-        }
+       
 
     
         System.out.println("Thanks for making your reservations!");
+        updateReservation(id);
 	}
 
 
     public static void deleteReservation(String reservationID){
 
     }
-    public static void updateReservation(String reservationID){
-    	
+    public void updateReservation(String reservationID) throws IOException{
+    	String s;
+    	String[] words=null;
+    	URL url = getClass().getResource("reservations.txt");
+ 		File file = new File(url.getPath());
+ 		FileReader fr=new FileReader(file);   
+		BufferedReader br=new BufferedReader(fr);  
+		while((s=br.readLine())!=null)
+	 	{
+	 			words=s.split(",");
+	 			System.out.println(words[0]+','+words[1]+','+words[2]+','+words[3]+','+words[4]+','+words[5]);
+	 	}
+		fr.close();
     }
 
 
