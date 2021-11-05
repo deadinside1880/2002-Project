@@ -1,4 +1,11 @@
 package restaurant;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -7,10 +14,11 @@ public class reservationApp {
     static int customerID = 0;
     static int tableID = 0;
     static int totalReservationCounter = 0;
+    static reservation[] reservationList = new reservation[10];
 
     public static void main(String[] args) throws Exception {
         
-
+    	reservationApp res=new reservationApp();
         Scanner scc = new Scanner(System.in);
         int output = 0;
         System.out.println("Hello! Would you like to create a reservation?");
@@ -18,7 +26,7 @@ public class reservationApp {
         
         output = scc.nextInt();
         if(output == 1){
-            createReservation();
+            res.createReservation();
         }
         else{
             System.out.println("Thanks for your time!");
@@ -26,13 +34,12 @@ public class reservationApp {
 
     }
 
-    public static void createReservation() {
+    public  void createReservation() throws IOException {
         int reservationCounter = 0;
         Scanner sc = new Scanner(System.in);
         int j= 0;
         System.out.println("Enter the total number of reservations:");
         reservationCounter = sc.nextInt();
-        reservation[] reservationList = new reservation[reservationCounter];
         for(int i=0; i<reservationCounter; i++)
 		{   int k = 0;
             int  pax = 0;
@@ -51,6 +58,7 @@ public class reservationApp {
             id =  getRandomNumberString();
             System.out.println("Enter the Date in this format (dd-MMM-yyyy) ");
             inputDate = sc.next();
+            System.out.println(id);
             date = getDateInputString(inputDate);
             tableCount = Math.floorDiv(pax, 5);
             table[] tableList = new table[tableCount];
@@ -62,13 +70,26 @@ public class reservationApp {
                 pax = pax -5;
 
             }
-
-            reservationList[j] = new reservation(id, pax, name, contact,date, tableList);
-            j++;
+           
+            reservationList[totalReservationCounter] = new reservation(id, pax, name, contact,date, tableList);
+        	URL url = getClass().getResource("reservations.txt");
+     		File file = new File(url.getPath());
+     		FileWriter fw = new FileWriter(file.getAbsolutePath(), true);
+     		BufferedWriter bw = new BufferedWriter(fw);
+    		PrintWriter pw = new PrintWriter(bw);
+     		pw.println(reservationList[totalReservationCounter].getreservationID()+','+reservationList[totalReservationCounter].getnoOfPax()+','+reservationList[totalReservationCounter].getName()+','+reservationList[totalReservationCounter].getContact()+','+reservationList[totalReservationCounter].getDate()+','+reservationList[totalReservationCounter].getTableList());
+     		System.out.println("Data Successfully appended into file");
+    		pw.flush();
+     		pw.close();
+    	    bw.close();
+    	    fw.close();
+            
             totalReservationCounter++;
 
 
         }
+
+    
         System.out.println("Thanks for making your reservations!");
 	}
 
@@ -77,7 +98,7 @@ public class reservationApp {
 
     }
     public static void updateReservation(String reservationID){
-
+    	
     }
 
 
