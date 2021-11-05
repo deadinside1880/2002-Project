@@ -59,6 +59,9 @@ public class reservation {
 		this.contact = contact;
 	}
 
+    public void setDate(Date date) {
+    	this.date = date;
+    }
 
 
 

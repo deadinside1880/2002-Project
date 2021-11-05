@@ -14,10 +14,10 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class reservationApp {
-    static int customerID = 0;
-    static int tableID = 0;
+    int customerID = 0;
+    int tableID = 0;
     static int totalReservationCounter = 0;
-    static reservation[] reservationList = new reservation[10];
+    reservation[] reservationList = new reservation[10];
 
     public static void main(String[] args) throws Exception {
         
@@ -107,24 +107,79 @@ public class reservationApp {
 	}
 
 
-    public static void deleteReservation(String reservationID){
-
+    public void deleteReservation(String name){
+    	int blah = checkReservation(name);
+    	if(blah>=0) {
+    		reservationList[blah] = null;    
+    		System.out.println("Reservation cancelled!!");
+    	}
     }
-    public void updateReservation(String reservationID) throws IOException{
-    	String s;
-    	String[] words=null;
-    	URL url = getClass().getResource("reservations.txt");
- 		File file = new File(url.getPath());
- 		FileReader fr=new FileReader(file);   
-		BufferedReader br=new BufferedReader(fr);  
-		while((s=br.readLine())!=null)
-	 	{
-	 			words=s.split(",");
-	 			System.out.println(words[0]+','+words[1]+','+words[2]+','+words[3]+','+words[4]+','+words[5]);
-	 	}
-		fr.close();
+    public void updateReservation(String name) throws IOException{
+//    	String s;
+//    	String[] words=null;
+//    	URL url = getClass().getResource("reservations.txt");
+// 		File file = new File(url.getPath());
+// 		FileReader fr=new FileReader(file);   
+//		BufferedReader br=new BufferedReader(fr);  
+//		while((s=br.readLine())!=null)
+//	 	{
+//	 			words=s.split(",");
+//	 			System.out.println(words[0]+','+words[1]+','+words[2]+','+words[3]+','+words[4]+','+words[5]);
+//	 			
+//	 	}
+//		fr.close();
+    	
+    	int index = checkReservation(name);
+    	if(index>-1) {
+    		printReservation(reservationList[index]);
+    		System.out.println("What would you like to change?");
+    		System.out.println("1 Name");
+    		System.out.println("2 Contact");
+    		System.out.println("3 No of Pax");
+    		System.out.println("4 Date");
+    		
+    		Scanner AT = new Scanner(System.in);
+    		int choice = AT.nextInt();
+    		
+    		switch(choice) {
+    			case 1:
+    				System.out.println("Enter new name");
+    				reservationList[index].setName(AT.nextLine());
+    				break;
+    			case 2:
+    				System.out.println("Enter new Contact");
+    				reservationList[index].setContact(AT.nextInt());
+    				break;
+    			case 3: 
+    				System.out.println("Enter new No of Pax");
+    				reservationList[index].setnoOfPax(AT.nextInt());
+    				break;
+    			case 4: 
+    				System.out.println("Enter new Date");
+    				reservationList[index].setDate(getDateInputString(AT.nextLine()));
+    				break;
+    		}
+    	}
     }
 
+    public int checkReservation(String name) {
+    	boolean flag = true;
+    	int counter = -1;
+    	for(reservation x : reservationList) {
+    		if(x.getName().equals(name)) {
+    			counter++;
+    			System.out.println("Reservation found!!");
+    			flag =false;
+    			
+    			return counter;
+    		}
+    	}
+    	
+    	if(flag) {
+    		System.out.println("Reservation not found!!");
+    	}
+		return -1;
+    }
 
 
     public static Date getDateInputString(String date) {
@@ -151,7 +206,9 @@ public class reservationApp {
         return String.format("%06d", number);
     }
 
-
+    public void printReservation(reservation x) {
+    	System.out.println(x.getName()+"\n"+x.getContact()+"\n"+x.getnoOfPax()+"\n"+x.getreservationID()+"\n"+x.getDate());
+    }
 
 
 }

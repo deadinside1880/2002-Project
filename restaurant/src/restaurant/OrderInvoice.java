@@ -2,11 +2,13 @@ package restaurant;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -36,8 +38,9 @@ public class OrderInvoice {
         float total = 0;
         orderInvoices.add("Invoice created at " + formattedCreateDate);
 
-        
-        FileReader fr = new FileReader("/Users/smolquail/Downloads/Y2S1/CZ2002/Project/currentOrder.txt");   
+        URL url = getClass().getResource("CurrentOrder.txt");
+ 		File file = new File(url.getPath());
+        FileReader fr = new FileReader(file.getAbsolutePath());   
  		BufferedReader br = new BufferedReader(fr);
         String s;
         String[] words = null;

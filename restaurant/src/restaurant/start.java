@@ -14,8 +14,12 @@ public class start {
         Scanner AT = new Scanner(System.in);
         int choice = -1;
         start obj = new start();
+        
+        Menu menux = new Menu();
+        reservationApp reservationapp = new reservationApp();
+        
 
-        while(choice != 10){
+        while(choice != 9){
             System.out.println("Welcome to this restaurant! What would you like to do?");
             System.out.println("(1) Get Invoice");
             System.out.println("(2) Check Tables");
@@ -39,9 +43,9 @@ public class start {
                     break;
                 case 3: obj.order(AT);
                     break;
-                case 4: obj.reservations(AT);
+                case 4: obj.reservations(AT, reservationapp);
                     break;
-                case 5: obj.menu(AT);
+                case 5: obj.menu(AT, menux);
                     break;
                 case 6:
                     break;
@@ -62,7 +66,7 @@ public class start {
         obj.createOrder();
     }
 
-    private void reservations(Scanner AT){
+    private void reservations(Scanner AT, reservationApp o)throws IOException{
         System.out.println("What would you like to do?");
         System.out.println("(1) Make a Reservation");
         System.out.println("(2) Cancel a Reservation");
@@ -70,23 +74,27 @@ public class start {
         System.out.println("(4) View Reservations");
 
         int choice = AT.nextInt();
-
+        AT.nextLine();
         switch(choice){
-            case 1:
+            case 1: o.createReservation();
                 break;
-            case 2:
+            case 2:System.out.println("Enter Reservation name");
+            	String id = AT.nextLine();
+            	o.deleteReservation(id);
                 break;
-            case 3:
+            case 3:System.out.println("Enter Reservation Id");
+        		String ID = AT.nextLine();
+        		o.updateReservation(ID);
                 break;
-            case 4:
-                System.out.println("----------- Reservations -----------");
-                //printStuff("reservations.txt");
+            case 4:System.out.println("Enter Reservation name");
+        		String Id = AT.nextLine();
+        		o.checkReservation(Id);
                 break;
             default: System.out.println("Invalid choice");
         }
     }
 
-    private void menu(Scanner AT) throws IOException{
+    private void menu(Scanner AT, Menu obj) throws IOException{
         System.out.println("What would you like to do?");
         System.out.println("(1) Add an Item");
         System.out.println("(2) Remove an Item");
@@ -96,12 +104,12 @@ public class start {
         int choice = AT.nextInt();
 
         try{
-            Menu obj = new Menu();
+            //Menu obj = new Menu();
             AT.nextLine();
             switch(choice){
                 case 1:
                     String [] metadata = new String[4];
-                    System.out.println("ENter name");
+                    System.out.println("Enter name");
                     metadata[0] = AT.nextLine();
                     System.out.println("Enter description");
                     metadata[1] = AT.nextLine();

@@ -1,8 +1,11 @@
 package restaurant;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -118,18 +121,27 @@ public class Menu {
 		return new Promotions(promoName, promoDescription, promoPrice, promoItems); 
 	}
 	
-	public void addAlaCarteItem(String name, String description, double price) {
+	public void addAlaCarteItem(String name, String description, double price)throws FileNotFoundException, IOException {
 		MenuItems newItem = new MenuItems(name, description, price);
 		alaCarteMenu.add(newItem);
+		printalaCarteItems(alaCarteMenu);
+		//writecsvAlaCarte(alaCarteMenu);
 	}
 	
-	public void addPromotionItem(String name, String description, String promoItems, double price) {
+	public void printalaCarteItems(ArrayList<MenuItems> menu) {
+		for(MenuItems x: menu) {
+			System.out.println(x.getName());
+		}
+	}
+	
+	public void addPromotionItem(String name, String description, String promoItems, double price)throws FileNotFoundException, IOException {
 		Promotions newItem = new Promotions(name, description, price, promoItems);
 		promoMenu.add(newItem);
+		//writecsvPromo(promoMenu);
 	}
 
 	
-	public void updateAlaCarte(String name) {
+	public void updateAlaCarte(String name)throws FileNotFoundException, IOException {
 		// find the item 
 		int index = -1;
 		Scanner sc = new Scanner(System.in); 
@@ -176,7 +188,9 @@ public class Menu {
 					System.out.println("Enter the new item price"); 
 					double newPrice = sc.nextDouble(); 
 					alaCarteMenu.get(index).setPrice(newPrice);
-				}			
+				}	
+				
+				//writecsvAlaCarte(alaCarteMenu);
 			}
 			 
 		}
@@ -185,7 +199,7 @@ public class Menu {
 		// System.out.println(index);
 	}
 	
-	public void updatePromo(String name) {
+	public void updatePromo(String name)throws FileNotFoundException, IOException {
 		// find the item 
 		int index = -1;
 		Scanner sc = new Scanner(System.in); 
@@ -241,6 +255,8 @@ public class Menu {
 					String newItem= sc.nextLine(); 
 					promoMenu.get(index).setPromoItems(newItem);
 				}
+				
+				//writecsvPromo(promoMenu);
 			}
 			 
 		}
@@ -250,7 +266,7 @@ public class Menu {
 	
 
 	
-	public ArrayList<MenuItems> removeAlaCarteItem(String name){
+	public ArrayList<MenuItems> removeAlaCarteItem(String name)throws FileNotFoundException, IOException{
 		int index = -1;
 		for (int i = 0; i < alaCarteMenu.size(); i++) {
 			if (alaCarteMenu.get(i).getName().equals(name)) 
@@ -258,13 +274,15 @@ public class Menu {
 		}
 		 
 		System.out.println(index);
-		if (index != -1)
-			alaCarteMenu.remove(index); 
+		if (index != -1) {
+			alaCarteMenu.remove(index);
+			//writecsvAlaCarte(alaCarteMenu);
+		}
 		return alaCarteMenu;
 		
 	}
 	
-	public ArrayList<Promotions> removePromoItem(String promoName){
+	public ArrayList<Promotions> removePromoItem(String promoName)throws FileNotFoundException, IOException{
 		int index = -1;
 		for (int i = 0; i < promoMenu.size(); i++) {
 			if (promoMenu.get(i).getPromoName().equals(promoName)) 
@@ -272,8 +290,10 @@ public class Menu {
 		}
 		 
 		System.out.println(index);
-		if (index != -1)
+		if (index != -1) {
 			promoMenu.remove(index); 
+			//writecsvPromo(promoMenu);
+		}
 		return promoMenu;
 		
 	}
@@ -302,7 +322,31 @@ public class Menu {
 		System.out.println();
 	}
 	
+	public void writecsvAlaCarte(ArrayList<MenuItems> ar)throws IOException, FileNotFoundException {
+		URL url = getClass().getResource("MenuItems.csv");
+ 		File file = new File(url.getPath());
+ 		FileWriter f=new FileWriter(file.getAbsolutePath(),true);   
+ 		BufferedWriter b=new BufferedWriter(f);   
+ 		PrintWriter pw = new PrintWriter(b); 
+ 		
+ 		//StringBuilder
+		for(MenuItems x : ar) {
+			pw.println(x.getName()+"," + x.getDescription()+","+x.getPrice()+","+x.getType());
+					
+		}
+	}
 	
+	public void writecsvPromo(ArrayList<Promotions> ar)throws IOException, FileNotFoundException {
+		URL url = getClass().getResource("Promotions.csv");
+ 		File file = new File(url.getPath());
+ 		FileWriter f=new FileWriter(file.getAbsolutePath(),true);   
+ 		BufferedWriter b=new BufferedWriter(f);   
+ 		PrintWriter pw = new PrintWriter(b); 
+		for(Promotions x : ar) {
+			pw.println(x.getPromoName()+ "," + x.getPromoDescription()+","+x.getPromoPrice()+","+x.getPromoItems());
+		
+		}
+	}
 }
 
 
