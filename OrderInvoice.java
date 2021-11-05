@@ -97,6 +97,8 @@ public class OrderInvoice {
     }
 
     public void printAllInvoices(ArrayList <String> orderInvoices){
+        System.out.println("Printing all invoices...");
+        System.out.println();
         for (int j=0; j<orderInvoices.size(); j++){
             System.out.println(orderInvoices.get(j));
         }
@@ -106,7 +108,6 @@ public class OrderInvoice {
         OrderInvoice invoice = new OrderInvoice();
         Order order = new Order();
         invoice.createOrderInvoice(order.getMembership());
-        System.out.println("Printing all invoices...");
         invoice.printAllInvoices(orderInvoices);
         
     }
