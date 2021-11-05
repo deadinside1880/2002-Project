@@ -21,35 +21,13 @@ public class Menu {
 	ArrayList<Promotions> promoMenu = new ArrayList<>(); 
 	
 	private BufferedReader getBR(String filename)throws FileNotFoundException, IOException{
-		//File currentdir = new File(".");
-		//displayDirectoryFiles(currentdir);
-		// File parent = currentdir.getParentFile();
-		// System.out.println(currentdir.getCanonicalPath());
-		// File newf = new File(filename);
-		// System.out.println(newf.exists());
-		// System.out.println(newf.getAbsolutePath());
+		
 		URL url = getClass().getResource(filename);
  		File file = new File(url.getPath());
 		FileReader fr=new FileReader( file.getAbsolutePath());   
  		BufferedReader br=new BufferedReader(fr);
 		return br;
 	}
-
-//	public static void displayDirectoryFiles(File dir) {
-//		try {
-//			File[] files = dir.listFiles();
-//			for (File file : files) {
-//				if (file.isDirectory()) {
-//					System.out.println("directory:" + file.getCanonicalPath());
-//					displayDirectoryFiles(dir);
-//				} else {
-//					System.out.println("     file:" + file.getCanonicalPath());
-//				}
-//			}
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 	public Menu() throws IOException {
 		alaCarteMenu = readcsvAlaCarte(getBR("MenuItems.csv")); 
@@ -309,6 +287,7 @@ public class Menu {
 		for (int i = 0; i < alaCarteMenu.size(); i++) {
 			System.out.printf("%s \t --- \t %.2f \n", alaCarteMenu.get(i).getName(), alaCarteMenu.get(i).getPrice()); 
 			System.out.println(alaCarteMenu.get(i).getDescription());
+			System.out.println(" ");
 			// System.out.println("Type: " + alaCarteMenu.get(i).getType());
 		}
 		System.out.println();
@@ -318,6 +297,7 @@ public class Menu {
 		for (int i = 0; i < promoMenu.size(); i++) {
 			System.out.printf("[%s] %s \t ----- \t %.2f\n", promoMenu.get(i).getPromoName(), promoMenu.get(i).getPromoItems(), promoMenu.get(i).getPromoPrice()); 
 			System.out.println(promoMenu.get(i).getPromoDescription()); 
+			System.out.println(" ");
 		}
 		System.out.println();
 	}

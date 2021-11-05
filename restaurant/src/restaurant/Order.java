@@ -38,7 +38,7 @@ public class Order{
  		{
  			words=s.split(",");
 			
- 			if(words[0].equals(this.staff.getEmployeeID()))
+ 			if(words[0].trim().equals(this.staff.getEmployeeID().trim()))
  			{
  				this.staff.setName(words[1]);;
  				this.staff.setGender(words[2]);
@@ -129,7 +129,7 @@ public class Order{
  		
  		int i=0,choice=-1;
  		startDate=getTimeAndDate();
-	 	neworder.add(i++,"Order Created At"+startDate);
+	 	neworder.add(i++,"Order Created At "+startDate);
 	 	staff=getStaff();
 	 	while(staff.getName()==null)
 	 	{
@@ -203,13 +203,13 @@ public class Order{
 	 	}
 		if(count==0)
 			{
-				System.out.println("Promotions meal ordered is not in the menu!!! Please try again");
+				System.out.println("Item ordered is not in the menu!!! Please try again");
 			}
 		if(count==1)
 			{
 				neworder.add(i,item+','+price);
 				i+=1;
-				System.out.println("Promotion meal has been added to the order!!!");
+				System.out.println("Item has been added to the order!!!");
 			}
 		fr.close();
 		return i;
@@ -246,13 +246,13 @@ public class Order{
 	 	}
 		if(count==0)
 		{
-			System.out.println("Item ordered is not in the menu!!! Please try again");
+			System.out.println("Promotion meal ordered is not in the menu!!! Please try again");
 		}
 		if(count==1)
 		{
 			neworder.add(i,item+','+price);
 			i+=1;
-			System.out.println("Item has been added to the order!!!");
+			System.out.println("Promotion meal has been added to the order!!!");
 		}
 	    fr.close();
  		return i;
@@ -319,7 +319,7 @@ public class Order{
  		String endDate=getTimeAndDate();
  		char mem=' ';
  		int flag=0;
- 		neworder.add(i,"Order Finished At"+endDate);
+ 		neworder.add(i,"Order Finished At "+endDate);
  		Scanner sc=new Scanner(System.in);
  		do
 	 		{

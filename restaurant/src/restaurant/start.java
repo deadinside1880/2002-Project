@@ -24,10 +24,10 @@ public class start {
             System.out.println("(5) View/Edit Menu");
             System.out.println("(6) Get Revenue/Sales Report");
             System.out.println("(7) Make/Remove/Update Promos");
-            System.out.println("(11) View/Edit Staff");
-            System.out.println("(8) Write to File");
-            System.out.println("(9) Read from File");
-            System.out.println("(10) Exit application");
+            System.out.println("(8) View/Edit Staff");
+            System.out.println("(9) Exit application");
+        
+
             
             choice = AT.nextInt();
             String path;
@@ -47,42 +47,8 @@ public class start {
                     break;
                 case 7:
                     break;
-//                case 9:System.out.println("Enter path");
-//                    path = AT.next();
-//                    int count = 0;
-//                    try{
-//                        System.out.println("-------- MENU---------");
-//                        for(String x: fr.readFile(path)){
-//                            System.out.print(x+ " ");
-//                            if(count ==2){
-//                                System.out.println();
-//                                count =0;
-//                            }
-//                            else{
-//                                count++;
-//                            }
-//                        }
-//                        System.out.println("---------------------");
-//                        System.out.println();
-//                    }catch(FileNotFoundException e ) {System.out.println(e);}
-//                    break;
-//                case 8:System.out.println("Enter data");
-//                    String temp = AT.nextLine();
-//                    String bleh = AT.nextLine();
-//                    ArrayList<String> data = new ArrayList<>();
-//                    System.out.println("enter linewrap");
-//                    int linewrap = AT.nextInt();
-//                    System.out.println("Enter path");
-//                    path = AT.nextLine();
-//                    try{
-//                        for(String x: fr.readFile(path))
-//                            data.add(x);  
-//                        data.add(bleh);  
-//                        fr.writeFile(data, path, linewrap);
-//                    }catch(FileNotFoundException fnfe){ System.out.println(fnfe);}
-//                    break;
-                case 10: break;
-                case 11:
+                case 9: break;
+                case 8:
                     obj.staff(AT);
                     break;
                 default: System.out.println("Please choose a valid option between 1 and 10");
@@ -92,28 +58,8 @@ public class start {
     }
 
     private void order(Scanner AT)throws IOException{
-        System.out.println("What would you like to do?");
         Order obj = new Order();
         obj.createOrder();
-    //     System.out.println("(1) Place an Order");
-    //     System.out.println("(2) Cancel an Order");
-    //     System.out.println("(3) Update an Order");
-    //     System.out.println("(4) View an Order");
-
-    //     int choice = AT.nextInt();
-    //     Order obj = new Order();
-
-    //     switch(choice){
-    //         case 1:obj.createOrder();
-    //             break;
-    //         case 2:
-    //             break;
-    //         case 3:
-    //             break;
-    //         case 4:
-    //             break;
-    //         default: System.out.println("Invalid choice");
-    //     }
     }
 
     private void reservations(Scanner AT){
