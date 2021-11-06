@@ -1,6 +1,7 @@
 package restaurant;
 
 import java.io.FileNotFoundException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.io.*;
 
 public class start {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParseException {
         
         Scanner AT = new Scanner(System.in);
         int choice = -1;
@@ -17,6 +18,9 @@ public class start {
         
         Menu menux = new Menu();
         reservationApp reservationapp = new reservationApp();
+        TableManager tb=new TableManager();
+        tb.initTables();
+        tb.initReservations();
         
 
         while(choice != 9){
@@ -66,7 +70,7 @@ public class start {
         obj.createOrder();
     }
 
-    private void reservations(Scanner AT, reservationApp o)throws IOException{
+    private void reservations(Scanner AT, reservationApp o)throws IOException, ParseException{
         System.out.println("What would you like to do?");
         System.out.println("(1) Make a Reservation");
         System.out.println("(2) Cancel a Reservation");

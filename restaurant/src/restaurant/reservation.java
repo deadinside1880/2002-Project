@@ -1,65 +1,62 @@
 package restaurant;
 
+import java.time.LocalTime;
 import java.util.*;
 
 
 public class reservation {
 
 	
-	private int noOfPax; 
+	private int tableID; 
 	private String name;
-	private int contact;
-	private Date date;
-	private String reservationID;
-	private table[] tableList;
-    public reservation(String reservationID, int noOfPax, String name, int contact, Date date, table[] tableList ){
-		this.reservationID = reservationID;
-        this.noOfPax = noOfPax;
-        this.name = name;
-        this.contact = contact;
-		this.date = date;
-		this.tableList = tableList;
+	private String contact;
+	private String date;
+	private LocalTime time;
+    public reservation(int tableID,String name,String contact,String date,LocalTime time2){
+		this.tableID=tableID;
+    	this.name=name;
+		this.date=date;
+		this.contact=contact;
+    	this.date = date;
+		this.time=time2;
 
     }
-
-	public int getnoOfPax() {
-		return this.noOfPax;
+	public int getTableID() {
+		return this.tableID;
 	}
 	
 	public String getName() {
 		return name;
 	}
 	
-	public double getContact() {
+	public String getContact() {
 		return contact;
 	}
-	public table[] getTableList() {
-		// for(table temp:tableList ){
-		// 	System.out.println(temp.getTableID());
-		// }
-		return tableList;
-	}
-
 	//note that date and reservation id cant be edited here by setters
-	public Date getDate() {
+	public String getDate() {
 		return this.date;
 	}
-	public String getreservationID() {
-		return this.reservationID;
+	public LocalTime getTime()
+	{
+		return this.time;
+	}
+	public void setTime(LocalTime time)
+	{
+		this.time=time;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 	
-	public void setnoOfPax(int noOfPax) {
-		this.noOfPax = noOfPax;
+	public void settableID(int tableID) {
+		this.tableID = tableID;
 	}
-    public void setContact(int contact) {
+    public void setContact(String contact) {
 		this.contact = contact;
 	}
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
     	this.date = date;
     }
 

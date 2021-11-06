@@ -129,13 +129,13 @@ public class Order{
  		
  		int i=0,choice=-1;
  		startDate=getTimeAndDate();
-	 	neworder.add(i++,"Order Created At "+startDate);
+	 	neworder.add(i++,startDate);
 	 	staff=getStaff();
 	 	while(staff.getName()==null)
 	 	{
 	 		staff=getStaff();
 	 	}
-	 	neworder.add(i++,"Order created by Staff:"+staff.getName());
+	 	neworder.add(i++,staff.getName());
  		while(choice!=6) 
  		{
  	 		System.out.println("Please select what you would like to do");
@@ -207,7 +207,7 @@ public class Order{
 			}
 		if(count==1)
 			{
-				neworder.add(i,item+','+price);
+				neworder.add(i,item+':'+price);
 				i+=1;
 				System.out.println("Item has been added to the order!!!");
 			}
@@ -250,7 +250,7 @@ public class Order{
 		}
 		if(count==1)
 		{
-			neworder.add(i,item+','+price);
+			neworder.add(i,item+':'+price);
 			i+=1;
 			System.out.println("Promotion meal has been added to the order!!!");
 		}
@@ -305,9 +305,9 @@ public class Order{
  		System.out.println("_ _ _ _ _ _ _ _ _ _ _ _ ");
  		for(int i=0;i<neworder.size();i++)
  		{
- 			if(neworder.get(i).contains(","))
+ 			if(neworder.get(i).contains(":") && !neworder.get(i).contains("-"))
  			{
- 			words=neworder.get(i).split(",");
+ 			words=neworder.get(i).split(":");
  			System.out.printf("%-20s%-20s\n",words[0],words[1]);
  			}
  		}
@@ -319,7 +319,7 @@ public class Order{
  		String endDate=getTimeAndDate();
  		char mem=' ';
  		int flag=0;
- 		neworder.add(i,"Order Finished At "+endDate);
+ 		neworder.add(i,endDate);
  		Scanner sc=new Scanner(System.in);
  		do
 	 		{
