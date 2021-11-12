@@ -24,8 +24,8 @@ public class OrderManager{
         System.out.println("What would you like to do?");
         System.out.println("(1) View Staff");
         System.out.println("(2) Add Staff");
-        System.out.println("(3) Remove Staff");
-        System.out.println("(4) Update Staff");
+//        System.out.println("(3) Remove Staff");
+//        System.out.println("(4) Update Staff");
         Scanner AT=new Scanner(System.in);
         int choice = AT.nextInt();
 
@@ -43,10 +43,10 @@ public class OrderManager{
                 String empid = AT.nextLine();
                 setStaff(empid);
                 break;
-            case 3: System.out.println("feature not available rn");
-                break;
-            case 4: System.out.println("feature unavailable");
-                break;
+//            case 3: System.out.println("feature not available rn");
+//                break;
+//            case 4: System.out.println("feature unavailable");
+//                break;
             default: System.out.println("Invalid option");            
         }
     }
