@@ -1,4 +1,4 @@
-package orderAndStaff;
+package restaurant;
 
 public class Staff {
 	
