@@ -43,7 +43,7 @@ public class SalesRevenue {
         {
         	System.out.printf("%-20s%-20d\n",items.get(i),itemquant.get(i));
         }
-        System.out.println("Total revernue: "+getTotalRevenue(date));
+        System.out.printf("Total revernue: %.2f \n", getTotalRevenue(date));
         //AT.close();
     }
 
